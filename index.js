@@ -41,7 +41,7 @@ app.message('discuss', async ({ message, say }) => {
 });
 
 
-/* get user info list here */ 
+/* get user info list here ,*/ 
 
 app.message('userinfo', async ({ message, say, context }) => {
  
@@ -126,3 +126,7 @@ app.view('view_modal', async ({ ack, body, view, context }) => {
 
   console.log('⚡️ Bolt app is running!');
 })();
+
+
+
+/* bruvvvv */

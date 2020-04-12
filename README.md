@@ -1,3 +1,7 @@
+
+[![Watch the video](https://i.imgur.com/sC97vny.png)](https://www.loom.com/share/bf875dc2557c473cb56724ebb4cb0d0b)
+
+
 # Alfred
 Alfred - Workplaces are more fun when you can break (company-sponsored) bread with your co-workers on zoom while discussing things you love!
 
@@ -12,8 +16,3 @@ Team Members
 Vachan Konamme
 Srinidhi Moodalagiri
 Gautham Sabhahit
-
-[![Watch the video](https://i.imgur.com/sC97vny.png)](https://www.loom.com/share/bf875dc2557c473cb56724ebb4cb0d0b)
-
-
-[![Watch the full demo]](https://www.loom.com/share/bf875dc2557c473cb56724ebb4cb0d0b)

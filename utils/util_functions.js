@@ -29,7 +29,7 @@ module.exports = {
 				console.log('adding meal'+meal_id);
 				try{
 					return await Meals.create({ 
-			      			mid: mid,
+			      			mid: meal_id,
 			      			dateString: date
 						} );
 				}catch(err){

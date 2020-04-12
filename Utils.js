@@ -1,3 +1,5 @@
+var _ = require('lodash');
+
 function createGDsection(title, description, block_id) {
     return ([
       {
@@ -186,12 +188,66 @@ function createGDsection(title, description, block_id) {
     });
   }
 
+  function getModalView(metaData){
+      return({
+        "type": "modal",
+        "callback_id": 'view_modal',
+        "private_metadata": metaData,
+        "title": {
+          "type": "plain_text",
+          "text": "My App",
+          "emoji": true
+        },
+        "submit": {
+          "type": "plain_text",
+          "text": "Create",
+          "emoji": true
+        },
+        "close": {
+          "type": "plain_text",
+          "text": "Cancel",
+          "emoji": true
+        },
+        "blocks": [
+          {
+            "type": "input",
+            "block_id": "modal_title",
+            "element": {
+              "action_id": "title",
+              "type": "plain_text_input"
+            },
+            "label": {
+              "type": "plain_text",
+              "text": "Group Discussion Topic",
+              "emoji": true
+            }
+          },
+          {
+            "type": "input",
+            "block_id": "desc",
+            "element": {
+              "type": "plain_text_input",
+              "action_id": "modal_description",
+              "multiline": true
+            },
+            "label": {
+              "type": "plain_text",
+              "text": "Topic Description",
+              "emoji": true
+            }
+          }
+        ]
+      })
+  }
+
   exports.createGDsection = createGDsection;
   exports.gdSectionPreviewCreator = gdSectionPreviewCreator;
   exports.mealCreatorMeta = mealCreatorMeta;
   exports.getDateString = getDateString;
   exports.addGDPreview = addGDPreview; 
   exports.createDivider = createDivider;
+  exports.getModalView = getModalView;
+  
 
 
 

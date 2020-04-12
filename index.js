@@ -12,7 +12,7 @@ const app = init();
 /* When this listener gets invoked, create create a random MID and save it in DB */
 app.message('familymeal', async ({ message, say }) => {
   let dateString = Utils.getDateString();
-  let mid = meal + Math.floor(new Date() / 1000);
+  let mid = Math.floor(new Date() / 1000);
   ggsUtils.add_meal(dateString, mid);
 
   let mealCreatorComponent = Utils.mealCreatorMeta(mid, dateString);

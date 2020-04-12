@@ -6,14 +6,14 @@ const https = require('https');
 var config = require('../config');
 
 module.exports = {
-	add_user: async function(uid,email_id,purl,name,is_admin){
+	add_user: async function(uid, email_id, purl, name, is_admin){
 				console.log('adding user'+email_id);
 				try{
 					return await Users.create({ 
 			      		  uid: uid,
 						  email: email_id,
 			  			  purl: purl,
-						  name: first_name,
+						  name: name,
 						  is_admin: is_admin, 
 						  zoom_access_token: "",
 						  zoom_first_name: "",
@@ -29,7 +29,7 @@ module.exports = {
 				console.log('adding meal'+meal_id);
 				try{
 					return await Meals.create({ 
-			      			mid: mid,
+			      			mid: meal_id,
 			      			dateString: date
 						} );
 				}catch(err){

@@ -12,8 +12,9 @@ const app = init();
 /* When this listener gets invoked, create create a random MID and save it in DB */
 app.message('familymeal', async ({ message, say }) => {
   let dateString = Utils.getDateString();
-  let mid = Math.floor(new Date() / 1000)
-  ggsUtils.add_meal(dateString,mid);
+  let mid = Math.floor(new Date() / 1000);
+  ggsUtils.add_meals(dateString, mid);
+
   let mealCreatorComponent = Utils.mealCreatorMeta(mid, dateString);
   
   await say(mealCreatorComponent);
@@ -59,7 +60,7 @@ app.message('userinfo', async ({ message, say, context }) => {
       pUrl: u.profile.image_32,
       is_admin: u.is_admin
     });
-    ggsUtils.add_user(u.id,u.name,u.profile.email,u.profile.image_32,u.is_admin)
+    ggsUtils.add_user(u.id, u.name, u.profile.email, u.profile.image_32, u.is_admin)
   });
   await say(JSON.stringify(users));
 });
@@ -87,7 +88,7 @@ app.action('add_discussion_click', async ({ body, ack, respond, context }) => {
   const modalResult = await app.client.views.open({
     token: context.botToken,
     trigger_id: body.trigger_id,
-    view: Utils.getModalView()
+    view: Utils.getModalView(metaData)
   });
 });
 
@@ -118,6 +119,30 @@ app.view('view_modal', async ({ ack, body, view, context }) => {
     as_user: true
   });
 });
+
+app.action('invite', async({ body, ack, say, context }) => {
+  await ack();
+
+  let resp = { blocks: [] };
+  let divider = Utils.createDivider();
+  resp.blocks.push({
+    "type": "section",
+    "text": {
+      "type": "mrkdwn",
+      "text": "*Discussion rooms for upcoming hacker meal (8 PM PST)*"
+    }
+  }
+  );
+  resp.blocks.push(divider);
+
+  for (let i = 0; i < 4; i++) {
+    let dSection = Utils.createGDsection("Hackathon Tips & Tricks", "Discussion on how to churn out code during a hackathon", `gd${i}`);
+    resp.blocks = _.concat(resp.blocks, dSection, divider);
+  }
+
+  say(resp);
+
+})
 
 
 (async () => {

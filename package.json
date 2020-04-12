@@ -1,0 +1,17 @@
+{
+  "name": "hacker-meal-slack-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@slack/bolt": "^2.0.0",
+    "knex": "^0.20.13",
+    "lodash": "^4.17.15",
+    "pg": "^8.0.2"
+  }
+}

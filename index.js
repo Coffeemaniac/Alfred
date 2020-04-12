@@ -2,6 +2,9 @@ const { App, LogLevel } = require('@slack/bolt');
 const { init } = require('./config.js');
 var _ = require('lodash');
 const Utils = require('./Utils.js');
+const ggsUtils = require('./utils/util_functions')
+var mongoSetup = require('./mongo_setup');
+var mongoose = require('mongoose');
 
 const app = init();
 
@@ -9,7 +12,10 @@ const app = init();
 /* When this listener gets invoked, create create a random MID and save it in DB */
 app.message('familymeal', async ({ message, say }) => {
   let dateString = Utils.getDateString();
-  let mealCreatorComponent = Utils.mealCreatorMeta("meal#007", dateString);
+  let mid = Math.floor(new Date() / 1000)
+  ggsUtils.add_meal(dateString,mid)
+  let mealCreatorComponent = Utils.mealCreatorMeta(mid, dateString);
+  
   await say(mealCreatorComponent);
 });
 
@@ -26,6 +32,7 @@ app.message('discuss', async ({ message, say }) => {
   }
   );
   resp.blocks.push(divider);
+
   for (let i = 0; i < 4; i++) {
     let dSection = Utils.createGDsection("Hackathon Tips & Tricks", "Discussion on how to churn out code during a hackathon", `gd${i}`);
     resp.blocks = _.concat(resp.blocks, dSection, divider);
@@ -52,6 +59,7 @@ app.message('userinfo', async ({ message, say, context }) => {
       pUrl: u.profile.image_32,
       is_admin: u.is_admin
     });
+    ggsUtils.add_user(u.id,u.name,u.profile.email,u.profile.image_32,u.is_admin)
   });
   await say(JSON.stringify(users));
 });

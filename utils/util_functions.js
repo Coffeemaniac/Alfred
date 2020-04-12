@@ -36,6 +36,75 @@ module.exports = {
 					console.log(err);
 				}
 			},
+	add_gds: async function(date,meal_id){
+				console.log('adding meal'+meal_id);
+				try{
+					return await Meals.create({ 
+			      			mid: mid,
+			      			dateString: date
+						} );
+				}catch(err){
+					console.log(err);
+				}
+			},
+	find_meals: async function(mid){
+			try{
+				Meals.find({mid:mid})
+				.then((doc)=>{
+				    console.log(doc[0]);
+				    return doc[0];
+				 })
+				.catch((err)=>{
+				    console.log(err);
+				    return err;
+				});
+			}catch(err){
+				console.log(err)
+			}
+	},
+
+	find_gds: async function(gid){
+		try{
+				GDs.find({gid:gid})
+				.then((doc)=>{
+				    console.log(doc[0]);
+				    return doc[0];
+				 })
+				.catch((err)=>{
+				    console.log(err);
+				    return err;
+				});
+			}catch(err){
+				console.log(err)
+			}
+	},
+	// updated_gds will be { <field1>: <value1>, ... } where field is schema key and value is the corresponding value
+	// ex: { description: ["aaa","bbb"], participants:["a1a","b1b"]}
+	update_gds: async function(gid,updated_obj){
+		try{
+		    return Users.findOneAndUpdate(
+		      { gid: gid },
+		      { $setOnInsert: updated_obj
+				},
+		      { upsert: true, new: true, rawResult: true }
+		    );
+		}catch(err){
+			console.log(err)
+		}
+	},
+
+	update_meals: async function(mid,updated_obj){
+		try{
+		    return Users.findOneAndUpdate(
+		      { mid: mid },
+		      { $setOnInsert: updated_obj
+				},
+		      { upsert: true, new: true, rawResult: true }
+		    );
+		}catch(err){
+			console.log(err)
+		}
+	},
 
 	update_access_token: async function(email_id,access_token){
 			try{
@@ -51,21 +120,12 @@ module.exports = {
 					console.log(err)
 				}
 			},
-	update_user: async function(uid,email_id,purl,name,access_token,first_name,last_name,pic_url){
+	update_user: async function(uid,){
 			try{
 				    return Users.findOneAndUpdate(
 				      { uid: email_id },
-				      { $setOnInsert: { 
-				      		  uid: uid,
-							  email: email_id,
-				  			  purl: purl,
-							  name: first_name,
-							  zoom_access_token: access_token,
-							  zoom_first_name: first_name,
-							  zoom_last_name: last_name,
-							  zoom_pic_url: pic_url
-							} 
-						},
+				      { $setOnInsert: updated_obj 
+				        },
 				      { upsert: true, new: true, rawResult: true }
 				    );
 				}catch(err){

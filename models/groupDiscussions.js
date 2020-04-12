@@ -6,7 +6,7 @@ var GDSChema = Schema({
   gid: String,
   mid: String,
   title: String,
-  description: [Number],
+  description: [String],
   participants: [String],
   host_uid: String
 });

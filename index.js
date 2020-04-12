@@ -92,6 +92,11 @@ app.action('add_discussion_click', async ({ body, ack, respond, context }) => {
   });
 });
 
+app.action('invite', async({ body, ack, say, context }) => {
+  await ack();
+  await say("discuss");
+});
+
 
 /* Create and add group discussion object here {You'll find the user input for topic and topic description}*/ 
 app.view('view_modal', async ({ ack, body, view, context }) => {
@@ -120,29 +125,7 @@ app.view('view_modal', async ({ ack, body, view, context }) => {
   });
 });
 
-app.action('invite', async({ body, ack, say, context }) => {
-  await ack();
 
-  let resp = { blocks: [] };
-  let divider = Utils.createDivider();
-  resp.blocks.push({
-    "type": "section",
-    "text": {
-      "type": "mrkdwn",
-      "text": "*Discussion rooms for upcoming hacker meal (8 PM PST)*"
-    }
-  }
-  );
-  resp.blocks.push(divider);
-
-  for (let i = 0; i < 4; i++) {
-    let dSection = Utils.createGDsection("Hackathon Tips & Tricks", "Discussion on how to churn out code during a hackathon", `gd${i}`);
-    resp.blocks = _.concat(resp.blocks, dSection, divider);
-  }
-
-  say(resp);
-
-})
 
 
 (async () => {

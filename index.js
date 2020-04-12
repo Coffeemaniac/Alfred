@@ -13,7 +13,7 @@ const app = init();
 app.message('familymeal', async ({ message, say }) => {
   let dateString = Utils.getDateString();
   let mid = Math.floor(new Date() / 1000)
-  ggsUtils.add_meal(dateString,mid)
+  ggsUtils.add_meal(dateString,mid);
   let mealCreatorComponent = Utils.mealCreatorMeta(mid, dateString);
   
   await say(mealCreatorComponent);
@@ -101,6 +101,9 @@ app.view('view_modal', async ({ ack, body, view, context }) => {
   let blocks = privateMetadata.blocks;
   let gdTitle = submissionData.modal_title.title.value;
   let gdDesc = submissionData.desc.modal_description.value;
+
+  let mealID = blocks[1].block_id;
+  console.log(mealID);
 
 
   let gdPreview = Utils.gdSectionPreviewCreator(gdTitle, gdDesc);

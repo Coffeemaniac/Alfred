@@ -14,7 +14,12 @@ module.exports = {
 						  email: email_id,
 			  			  purl: purl,
 						  name: first_name,
-						  is_admin: is_admin
+						  is_admin: is_admin, 
+						  zoom_access_token: "",
+						  zoom_first_name: "",
+						  zoom_last_name: "",
+						  zoom_pic_url:"",
+						  zoom_id: ""
 						} );
 				}catch(err){
 					console.log(err);

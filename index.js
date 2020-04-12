@@ -5,6 +5,8 @@ const Utils = require('./Utils.js');
 
 const app = init();
 
+
+/* When this listener gets invoked, create create a random MID and save it in DB */
 app.message('familymeal', async ({ message, say }) => {
   let dateString = Utils.getDateString();
   let mealCreatorComponent = Utils.mealCreatorMeta("meal#007", dateString);
@@ -32,6 +34,8 @@ app.message('discuss', async ({ message, say }) => {
 });
 
 
+/* get user info list here */ 
+
 app.message('userinfo', async ({ message, say, context }) => {
  
   const result = await app.client.users.list({
@@ -53,6 +57,7 @@ app.message('userinfo', async ({ message, say, context }) => {
 });
 
 
+/* You'll be able to find user who clicked and the group discussion id here*/
 app.action('join_btn_click', async ({ body, ack, respond }) => {
   await ack();
   let blocks = _.cloneDeep(body.message.blocks);
@@ -65,6 +70,8 @@ app.action('join_btn_click', async ({ body, ack, respond }) => {
 
 });
 
+
+/* This function is called when user clicks on the Add discussion button */
 app.action('add_discussion_click', async ({ body, ack, respond, context }) => {
   await ack();
   console.log(body.actions[0].block_id);
@@ -76,11 +83,13 @@ app.action('add_discussion_click', async ({ body, ack, respond, context }) => {
   });
 });
 
+
+/* Create and add group discussion object here {You'll find the user input for topic and topic description}*/ 
 app.view('view_modal', async ({ ack, body, view, context }) => {
   await ack();
 
   let privateMetadata = JSON.parse(view.private_metadata);
-  let submissionData = view.state.values;
+  let submissionData = view.state.values; /* Contains values of user input to modal */
   let blocks = privateMetadata.blocks;
   let gdTitle = submissionData.modal_title.title.value;
   let gdDesc = submissionData.desc.modal_description.value;

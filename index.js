@@ -59,7 +59,7 @@ app.message('userinfo', async ({ message, say, context }) => {
       pUrl: u.profile.image_32,
       is_admin: u.is_admin
     });
-    ggsUtils.add_user(u.id,u.name,u.profile.email,u.profile.image_32,u.is_admin)
+    ggsUtils.add_user(u.id, u.name, u.profile.email, u.profile.image_32, u.is_admin)
   });
   await say(JSON.stringify(users));
 });

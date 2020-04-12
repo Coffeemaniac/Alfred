@@ -13,7 +13,7 @@ const app = init();
 app.message('familymeal', async ({ message, say }) => {
   let dateString = Utils.getDateString();
   let mid = Math.floor(new Date() / 1000)
-  ggsUtils.add_meal(dateString,mid);
+  ggsUtils.add_meals(dateString,mid);
   let mealCreatorComponent = Utils.mealCreatorMeta(mid, dateString);
   
   await say(mealCreatorComponent);

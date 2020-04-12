@@ -88,7 +88,7 @@ app.action('add_discussion_click', async ({ body, ack, respond, context }) => {
   const modalResult = await app.client.views.open({
     token: context.botToken,
     trigger_id: body.trigger_id,
-    view: Utils.getModalView()
+    view: Utils.getModalView(metaData)
   });
 });
 
